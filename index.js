@@ -28,7 +28,11 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  let movieArr = movies.map(obj => obj.title);
+
+  return movieArr;
+}
 
 /**
  * getHighestMetascore()
@@ -41,7 +45,14 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+function getHighestMetascore(movies) {
+  let highestScore = 0;
+  movies.forEach(obj => {
+    if (Number(obj.metascore) > highestScore) {highestScore = Number(obj.metascore)}
+  });
+
+  return highestScore;
+}
 
 /**
  * getAverageIMDBRating()
@@ -54,7 +65,17 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+  let averagesArr = [];
+  let imdbRating = 0;
+
+  movies.forEach(obj => {
+    averagesArr.push(Number(obj.imdbRating));
+    imdbRating += Number(obj.imdbRating);
+  });
+
+  return movies.length !== 0 ? imdbRating / averagesArr.length : 0;
+}
 
 /**
  * countByRating()
@@ -67,7 +88,19 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+  let movieRatingsObj = {};
+
+  movies.forEach(obj => {
+    if (!movieRatingsObj[obj.rated]) {
+      movieRatingsObj[obj.rated] = 1;
+    } else {
+      movieRatingsObj[obj.rated]++;
+    }
+  });
+
+  return movieRatingsObj;
+}
 
 /**
  * findById()
@@ -83,7 +116,9 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  return movies.find(obj => obj.imdbID === id) || null;
+}
 
 /**
  * filterByGenre()
@@ -105,7 +140,17 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  let movieArr = [];
+  movies.forEach(obj => {
+   genreArr = Array.from(obj.genre.split(', '), word => word.toUpperCase());
+   console.log(genreArr);
+   if (genreArr.includes(genre.toUpperCase())) {movieArr.push(obj)};
+  });
+
+  return movieArr;
+
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
