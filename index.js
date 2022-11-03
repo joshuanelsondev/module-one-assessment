@@ -144,8 +144,7 @@ function filterByGenre(movies, genre) {
   let movieArr = [];
   movies.forEach(obj => {
    genreArr = Array.from(obj.genre.split(', '), word => word.toUpperCase());
-   console.log(genreArr);
-   if (genreArr.includes(genre.toUpperCase())) {movieArr.push(obj)};
+   if (genreArr.includes(genre.toUpperCase())) {movieArr.push(obj);}
   });
 
   return movieArr;
@@ -174,7 +173,9 @@ function filterByGenre(movies, genre) {
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  return movies.filter(obj => Number(obj.released.split(' ')[2]) <= year);
+}
 
 /**
  * getBiggestBoxOfficeMovie()
