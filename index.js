@@ -48,7 +48,7 @@ function getAllMovieTitles(movies) {
 function getHighestMetascore(movies) {
   let highestScore = 0;
   movies.forEach(obj => {
-    if (Number(obj.metascore) > highestScore) {highestScore = Number(obj.metascore)}
+    if (+obj.metascore > highestScore) {highestScore = +obj.metascore;}
   });
 
   return highestScore;
@@ -70,8 +70,8 @@ function getAverageIMDBRating(movies) {
   let imdbRating = 0;
 
   movies.forEach(obj => {
-    averagesArr.push(Number(obj.imdbRating));
-    imdbRating += Number(obj.imdbRating);
+    averagesArr.push(+obj.imdbRating);
+    imdbRating += +obj.imdbRating;
   });
 
   return movies.length !== 0 ? imdbRating / averagesArr.length : 0;
@@ -174,7 +174,7 @@ function filterByGenre(movies, genre) {
     ];
  */
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
-  return movies.filter(obj => Number(obj.released.split(' ')[2]) <= year);
+  return movies.filter(obj => +obj.released.split(' ')[2] <= year);
 }
 
 /**
@@ -188,7 +188,21 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(movies) {
+  let highestAmount = 0;
+  let highestBoxOffice;
+  movies.forEach(obj => {
+    let boxOfficeNum = obj.boxOffice.replace('$', '').replaceAll(',', '');
+
+    if (+boxOfficeNum > highestAmount) {
+      highestAmount = +boxOfficeNum;
+      highestBoxOffice = obj.title;
+      
+    }
+  });
+
+  return highestBoxOffice || null;
+}
 
 // Do not change anything below this line.
 module.exports = {
