@@ -140,9 +140,9 @@ function findById(movies, id) {
  */
 function filterByGenre(movies, genre) {
   let movieArr = [];
+  let capitalGenre = genre.charAt(0).toUpperCase() + genre.slice(1).toLowerCase();
   movies.forEach(obj => {
-   genreArr = Array.from(obj.genre.split(', '), word => word.toUpperCase());
-   if (genreArr.includes(genre.toUpperCase())) {movieArr.push(obj);}
+   if (obj.genre.includes(capitalGenre)) {movieArr.push(obj);}
   });
 
   return movieArr;
