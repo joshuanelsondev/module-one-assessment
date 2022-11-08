@@ -66,15 +66,13 @@ function getHighestMetascore(movies) {
  *  //> 7.76
  */
 function getAverageIMDBRating(movies) {
-  let averagesArr = [];
   let imdbRating = 0;
 
   movies.forEach(obj => {
-    averagesArr.push(+obj.imdbRating);
     imdbRating += +obj.imdbRating;
   });
 
-  return movies.length !== 0 ? imdbRating / averagesArr.length : 0;
+  return movies.length !== 0 ? imdbRating / movies.length : 0;
 }
 
 /**
@@ -190,7 +188,7 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
  */
 function getBiggestBoxOfficeMovie(movies) {
   let highestAmount = 0;
-  let highestBoxOffice;
+  let highestBoxOffice = null;
   movies.forEach(obj => {
     let boxOfficeNum = obj.boxOffice.replace('$', '').replaceAll(',', '');
 
@@ -201,7 +199,7 @@ function getBiggestBoxOfficeMovie(movies) {
     }
   });
 
-  return highestBoxOffice || null;
+  return highestBoxOffice;
 }
 
 // Do not change anything below this line.
